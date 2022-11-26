@@ -20,5 +20,10 @@ module.exports = {
             .populate('friends')
             .then((student) => res.json(student))
             .catch((err) => res.status(500).json(err));
+    },
+    updateUser(req, res) {
+        User.updateOne({ _id: req.params.id }, { username: req.body.username })
+            .then((student) => res.json(student))
+            .catch((err) => res.status(500).json(err));
     }
 }
