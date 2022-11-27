@@ -1,4 +1,5 @@
 const { User, Thought } = require('../models');
+const { Types } = require('mongoose');
 
 // function that deletes thoughts with the associated username
 function deleteRelatedThoughts (id) {
@@ -9,7 +10,7 @@ module.exports = {
     //  Create a new user with request body data 
     createUser(req, res) {
         User.create(req.body)
-        .then((student) => res.json(student))
+        .then((user) => res.json(user))
         .catch((err) => res.status(500).json(err));
     },
     // Get all users
@@ -17,7 +18,7 @@ module.exports = {
         User.find()
             .populate('thoughts')
             .populate('friends')
-            .then((student) => res.json(student))
+            .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
     // Get specific User by Id
@@ -25,22 +26,34 @@ module.exports = {
         User.findOne({ _id: req.params.id})
             .populate('thoughts')
             .populate('friends')
-            .then((student) => res.json(student))
+            .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
     // Update a User's username by Id
     updateUser(req, res) {
         User.updateOne({ _id: req.params.id }, { username: req.body.username })
-            .then((student) => res.json(student))
+            .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
     // Delete a User by Id
     deleteUser(req, res) {
         User.deleteOne({ _id: req.params.id })
-            .then((student) => {
+            .then((user) => {
                 deleteRelatedThoughts(req.params.id) //delete related thoughts
-                return res.json(student)
+                return res.json(user);
             })
+            .catch((err) => res.status(500).json(err));
+    },
+    // Add a friend 
+    addFriend(req, res) {
+        User.findByIdAndUpdate(req.params.id, { $addToSet: { friends: { _id: Types.ObjectId(req.params.friendId) } } })
+            .then((user) => res.json(user))
+            .catch((err) => res.status(500).json(err));
+    },
+    // Remove a friend
+    removeFriend(req, res) {
+        User.findByIdAndUpdate(req.params.id, { $pull: { friends: Types.ObjectId(req.params.friendId) } })
+            .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     }
 };
