@@ -19,5 +19,11 @@ module.exports = {
         Thought.findById(req.params.thoughtId)
             .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
+    },
+    updateThought(req, res) {
+        Thought.findByIdAndUpdate(req.params.thoughtId, { thoughtText: req.body.thoughtText })
+            .then((user) => res.json(user))
+            .catch((err) => res.status(500).json(err));
     }
+
 }
