@@ -14,5 +14,10 @@ module.exports = {
         Thought.find()
             .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err))
+    },
+    getSpecificThought(req, res) {
+        Thought.findById(req.params.thoughtId)
+            .then((user) => res.json(user))
+            .catch((err) => res.status(500).json(err));
     }
 }
