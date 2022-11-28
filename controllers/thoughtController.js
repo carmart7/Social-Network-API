@@ -34,6 +34,10 @@ module.exports = {
         Thought.findByIdAndUpdate(req.params.thoughtId, { $addToSet: { reactions: { reactionBody: req.body.reactionBody, username: req.body.username} }})
             .then((thought) => res.json(thought))
             .catch((err) => res.status(500).json(err));
+    },
+    deleteReaction(req, res) {
+        Thought.findByIdAndUpdate(req.params.thoughtId, { $pull: { reactions:  { reactionId: Types.ObjectId(req.params.reactionId) } } })
+            .then((thought) => res.json(thought))
+            .catch((err) => res.status(500).json(err));
     }
-
 }
