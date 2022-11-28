@@ -20,6 +20,13 @@ const reactionSchema = mongoose.Schema(
             default: Date.now,
             get: formatDate
         }
+    },
+    {
+        toJSON: {
+            getters: true
+        },
+        _id: false
+
     }
 )
 
