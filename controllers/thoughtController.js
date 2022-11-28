@@ -24,6 +24,11 @@ module.exports = {
         Thought.findByIdAndUpdate(req.params.thoughtId, { thoughtText: req.body.thoughtText })
             .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
+    },
+    deleteThought(req, res) {
+        Thought.findByIdAndDelete(req.params.thoughtId)
+            .then((user) => res.json(user))
+            .catch((err) => res.status(500).json(err));
     }
 
 }
