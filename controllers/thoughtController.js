@@ -10,4 +10,9 @@ module.exports = {
             })
             .catch((err) => res.status(500).json(err));
     },
+    getThoughts(req, res) {
+        Thought.find()
+            .then((user) => res.json(user))
+            .catch((err) => res.status(500).json(err))
+    }
 }
