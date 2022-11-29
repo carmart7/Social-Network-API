@@ -2,5 +2,24 @@
   "dependencies": {
     "express": "^4.18.2",
     "mongoose": "^6.7.3"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "social-network-api",
+  "description": "This project was built to demonstrate what API routes would look like to manage a social media database using [MongoDB](https://www.mongodb.com/). To manage the MongoDB database I am making use of the [mongoose](https://www.npmjs.com/package/mongoose) node module that allows for schemas to be used for data formatting before going anywhere near the actual database. [Express](https://www.npmjs.com/package/express) is used as the web framework to create RESTful API routes to interact with the database from the front end.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carmart7/Social-Network-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carmart7/Social-Network-API/issues"
+  },
+  "homepage": "https://github.com/carmart7/Social-Network-API#readme"
 }
